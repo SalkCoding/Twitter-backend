@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Twitter Login Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta property="og:title" content="Twitter Login Form"/>
+    {{>layouts/login/import}}
+</head>
+<body>
+<div class='container'>
+    {{>layouts/failAlter}}
+    <div class='div-1'>
+        <div class='sub-div-1'>
+            <i class="fa fa-twitter icon"></i>
+        </div>
+    </div>
+    <div class='div-2'>
+        <div class='sub-div-2'>
+            <h3>Log in to Twitter</h3>
+        </div>
+    </div>
+    <form action="/signin" method="post">
+        {{>layouts/login/input}}
+        <div class='div-5'>
+            <div class='sub-div-5'>
+                <button>Log in</button>
+            </div>
+        </div>
+    </form>
+    <div class='div-6'>
+        <div class='sub-div-6'>
+            <a href='/signup'>Sign up for Twitter</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<form>
+    <div class="post_footer">
+        <input type="hidden" name="commentId" value="{{{commentId}}}">
+        <input type="hidden" name="postId" value="{{{postId}}}">
+        <button formaction="/comment/like" formmethod="post">
+            <span style="cursor: pointer;" class="material-icons">favorite_border</span>{{commentLikeCount}}
+        </button>
+        <button formaction="/comment/delete" formmethod="post">
+            <span style="cursor: pointer;" class="material-icons">delete</span>
+        </button>
+    </div>
+</form>

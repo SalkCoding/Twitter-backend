@@ -1,0 +1,77 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Leave a comment!</h2>
+    </div>
+
+    <!-- comment write -->
+
+    <div class="tweet_box">
+        <form action="/comment/create" method="post">
+            <div class="tweet_box-input">
+                <img src="/images/profilePic.jpg" alt="profile imagw">
+                <input type="hidden" name="postId" value="{{postId}}">
+                <input name="content" type="text" placeholder="What are you thinking?">
+                <button class="">Write</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Post -->
+    <div class="header">
+        <h2>Post</h2>
+    </div>
+    <div class="post">
+        {{#tweet}}
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                        </h3>
+                    </div>
+                    <br>
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {{/tweet}}
+    </div>
+
+
+    <div class="header">
+        <h2>Comments</h2>
+    </div>
+    <!-- Comments -->
+    {{#comment}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                        </h3>
+                    </div>
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+                {{>layouts/comment/commentFooter}}
+            </div>
+        </div>
+    {{/comment}}
+</main>
+<!-- main section end -->

@@ -1,0 +1,32 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Liked posts</h2>
+    </div>
+
+    {{#comment}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                        </h3>
+                    </div>
+
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+                {{>layouts/likedComment/likedCommentFooter}}
+            </div>
+        </div>
+    {{/comment}}
+</main>
+<!-- main section end -->

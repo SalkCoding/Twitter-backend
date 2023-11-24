@@ -1,0 +1,42 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Home</h2>
+    </div>
+
+    <div class="tweet_box">
+        <form action="/post/create" method="post">
+            <div class="tweet_box-input">
+                <img src="/images/profilePic.jpg" alt="profile imagw">
+                <input name="content" type="text" placeholder="What's happening?">
+                <button class="">Tweet</button>
+            </div>
+        </form>
+    </div>
+
+    {{#tweet}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                        </h3>
+                    </div>
+
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+                {{>layouts/post/postFooter}}
+            </div>
+        </div>
+    {{/tweet}}
+</main>
+<!-- main section end -->

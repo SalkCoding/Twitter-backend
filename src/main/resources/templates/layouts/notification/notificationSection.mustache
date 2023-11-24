@@ -1,0 +1,26 @@
+<!-- main section start -->
+<main>
+    {{>layouts/infoAlter}}
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Notifications</h2>
+    </div>
+
+    {{#notification}}
+        <div class="post">
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>Received at {{{created}}}</h3>
+                    </div>
+                    <br>
+                    <div class="post_header-description">
+                        <p>{{{content}}}</p>
+                    </div>
+                </div>
+                {{>layouts/notification/notificationFooter}}
+            </div>
+        </div>
+    {{/notification}}
+</main>
+<!-- main section end -->

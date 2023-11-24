@@ -1,0 +1,41 @@
+<!-- main section start -->
+<main>
+    {{>layouts/infoAlter}}
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Profile</h2>
+    </div>
+
+    {{#profile}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{userId}}}
+                            <span class="header-icon-section">@{{{userId}}}</span>
+                        </h3>
+                        <h3>Number of posts written: {{{postCount}}}
+                        </h3>
+                        <h3>
+                            Number of comments written: {{{commentCount}}}
+                        </h3>
+                        <h3>Follower: {{{followers}}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tweet_box">
+            <form action="/profile/password/change" method="post">
+                <div class="tweet_box-input">
+                    <img src="/images/profilePic.jpg" alt="profile imagw">
+                    <input name="password" type="password" value="{{{password}}}" placeholder="New password">
+                    <button class="">Change</button>
+                </div>
+            </form>
+        </div>
+    {{/profile}}
+</main>
+<!-- main section end -->

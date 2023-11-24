@@ -1,0 +1,39 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Follow</h2>
+    </div>
+
+    <div class="tweet_box">
+        <form action="/follow/create" method="post">
+            <div class="tweet_box-input">
+                <img src="/images/profilePic.jpg" alt="profile imagw">
+                <input name="targetId" type="text" placeholder="Who want to follow? Enter user ID!">
+                <button class="">Follow</button>
+            </div>
+        </form>
+    </div>
+
+    {{#follow}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{targetId}}}
+                            <span class="header-icon-section">@{{{targetId}}}</span>
+                            <p>Last login time: {{{lastLogin}}}</p>
+                        </h3>
+
+                    </div>
+                </div>
+                {{>layouts/follow/followFooter}}
+            </div>
+        </div>
+    {{/follow}}
+</main>
+<!-- main section end -->
