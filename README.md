@@ -1,7 +1,7 @@
 # Twitter-backend
 데이터베이스 6조 소스코드
 
-#실행 방법
+# 실행 방법
 zip으로 다운 받은후, src/main/resources/application.properties<br>
 파일에 있는 데이터 베이스 비밀번호를 로컬에 맞게 설정합니다.<br>
 cmd 창에 gradlew build 쳐서 컴파일 합니다. (경로 맞게 설정해줘야 합니다)<br>
