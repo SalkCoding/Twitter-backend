@@ -48,12 +48,9 @@ public class UserService {
     }
 
     @Transactional
-    public boolean changePassword(String userId, String oldPassword, String newPassword) {
-        if (getUser(userId, oldPassword) != null) {
+    public void changePassword(String userId, String oldPassword, String newPassword) {
+        if (getUser(userId, oldPassword) != null)
             userRepository.updatePasswordByUserId(userId, oldPassword, newPassword);
-            return true;
-        }
-        return false;
     }
 
     @Transactional
