@@ -24,7 +24,7 @@ public class FollowController {
     private final UserService userService;
     private final FollowService followService;
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @GetMapping("/follow")
     public String communityPage(

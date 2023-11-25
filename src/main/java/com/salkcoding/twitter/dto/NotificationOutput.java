@@ -11,10 +11,11 @@ public class NotificationOutput {
     private String content;
     private String created;
 
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public NotificationOutput(long notificationId, String content, long created) {
         this.notificationId = notificationId;
         this.content=content;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(created);
         this.created = simpleDateFormat.format(calendar.getTime());
