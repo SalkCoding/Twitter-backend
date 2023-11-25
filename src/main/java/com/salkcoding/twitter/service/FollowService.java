@@ -13,28 +13,33 @@ import java.util.List;
 public class FollowService {
 
     private final FollowRepository followRepository;
+    private final NotificationService notificationService;
 
     public boolean isFollowed(String targetId, String followerId) {
         return followRepository.findByFollowerIdAndTargetId(targetId, followerId) != null;
     }
 
-    public List<Follow> getFollowList(String userId){
+    public List<Follow> getFollowList(String userId) {
         return followRepository.getFollowsByFollowerId(userId);
     }
 
-    public List<Follow> getFollowerList(String targetId){
+    public List<Follow> getFollowerList(String targetId) {
         return followRepository.getFollowersByTargetId(targetId);
     }
 
     @Transactional
     public void addFollow(String targetId, String followerId) {
         Follow follow = new Follow(targetId, followerId);
+
+        if (!targetId.equals(followerId))
+            notificationService.addNotification(targetId, "@" + followerId + " now following you!");
+
         followRepository.save(follow);
     }
 
     @Transactional
     public void deleteFollow(String targetId, String followerId) {
-        followRepository.deleteByTargetIdAndFollowerId(targetId,followerId);
+        followRepository.deleteByTargetIdAndFollowerId(targetId, followerId);
     }
 
 }

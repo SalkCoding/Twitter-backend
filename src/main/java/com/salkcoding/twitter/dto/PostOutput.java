@@ -10,4 +10,5 @@ public class PostOutput {
     String writerId;
     String content;
     int postLikeCount;
+    String created;
 }

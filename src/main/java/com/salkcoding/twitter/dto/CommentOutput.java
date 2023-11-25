@@ -12,4 +12,6 @@ public class CommentOutput {
 
     int commentLikeCount;
     long postId;
+
+    String created;
 }

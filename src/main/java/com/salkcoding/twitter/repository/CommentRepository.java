@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    @Query(value = "select * from `comment` where `post_id`=:postId", nativeQuery = true)
+    @Query(value = "select * from `comment` where `post_id`=:postId order by `created` desc", nativeQuery = true)
     List<Comment> getCommentsByPostId(long postId);
 
     @Query(value = "select count(*) from `comment` where `writer_id`=:writerId", nativeQuery = true)

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 
-    @Query(value = "select * from `notification` where `user_id`=:userId",nativeQuery = true)
+    @Query(value = "select * from `notification` where `user_id`=:userId order by `created` desc",nativeQuery = true)
     List<Notification> findAllByUserId(String userId);
 
     @Modifying

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query(value = "select * from `post` where `writer_id`=:writerId order by `created`", nativeQuery = true)
+    @Query(value = "select * from `post` where `writer_id`=:writerId", nativeQuery = true)
     List<Post> findAllByWriterId(String writerId);
 
     @Modifying

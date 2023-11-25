@@ -1,8 +1,6 @@
 package com.salkcoding.twitter.controller;
 
 import com.salkcoding.twitter.dto.PostInput;
-import com.salkcoding.twitter.dto.PostOutput;
-import com.salkcoding.twitter.entity.Post;
 import com.salkcoding.twitter.entity.User;
 import com.salkcoding.twitter.service.PostLikeService;
 import com.salkcoding.twitter.service.PostService;
@@ -10,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,11 +26,6 @@ public class PostController {
         if (postInput.getContent().isEmpty()) return "redirect:/";
 
         postService.addPost(user.getUserId(), postInput.getContent());
-
-        List<Post> postList = postService.getReadablePostList(user.getUserId());
-        postList.forEach(post -> {
-            post.setContent(post.getContent().replaceAll("\n", "<br>"));
-        });
 
         return "redirect:/";
     }

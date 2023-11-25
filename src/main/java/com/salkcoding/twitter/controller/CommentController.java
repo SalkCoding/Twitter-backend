@@ -1,9 +1,6 @@
 package com.salkcoding.twitter.controller;
 
-import com.salkcoding.twitter.dto.CommentInput;
-import com.salkcoding.twitter.dto.CommentOutput;
-import com.salkcoding.twitter.dto.CommentLikeDTO;
-import com.salkcoding.twitter.dto.PostOutput;
+import com.salkcoding.twitter.dto.*;
 import com.salkcoding.twitter.entity.Comment;
 import com.salkcoding.twitter.entity.Post;
 import com.salkcoding.twitter.entity.User;
@@ -17,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -29,6 +28,8 @@ public class CommentController {
     private final CommentService commentService;
     private final CommentLikeService commentLikeService;
 
+    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     @GetMapping("/comment")
     public String showCommentPage(
             @SessionAttribute(value = "loginUser", required = false) User user,
@@ -38,11 +39,14 @@ public class CommentController {
         if (user == null) return "redirect:/login";
 
         Post post = postService.getPostById(postId);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(post.getCreated());
         PostOutput tweet = new PostOutput(
                 post.getPostId(),
                 post.getWriterId(),
                 post.getContent(),
-                postLikeService.getLikeCountOnPost(post.getPostId())
+                postLikeService.getLikeCountOnPost(post.getPostId()),
+                simpleDateFormat.format(calendar.getTime())
         );
         model.addAttribute("tweet", tweet);
 
@@ -56,13 +60,15 @@ public class CommentController {
         List<Comment> commentList = commentService.getCommentListOnPost(postId);
         commentList.forEach(comment -> {
             comment.setContent(comment.getContent().replaceAll("\n", "<br>"));
+            calendar.setTimeInMillis(comment.getCommentId());
             commentOutputList.add(
                     new CommentOutput(
                             comment.getCommentId(),
                             comment.getWriterId(),
                             comment.getContent(),
                             commentLikeService.getLikeCountOnComment(comment.getCommentId()),
-                            postId
+                            postId,
+                            simpleDateFormat.format(calendar.getTime())
                     )
             );
         });
@@ -126,6 +132,21 @@ public class CommentController {
         redirectAttributes.addFlashAttribute("postId", commentDTO.getPostId());
 
         return "redirect:/comment";
+    }
+
+    @PostMapping("/comment/like/cancel")
+    public String likeCancelPage(
+            @SessionAttribute(name = "loginUser", required = false) User user,
+            CommentLikeDTO commentLikeDTO
+    ) {
+        if (user == null) return "redirect:/login";
+
+        long commentId = commentLikeDTO.getCommentId();
+        String userId = user.getUserId();
+        if (commentLikeService.isLikedComment(commentId, userId))
+            commentLikeService.deleteCommentLike(commentId, userId);
+
+        return "redirect:/liked/comment";
     }
 
 }
