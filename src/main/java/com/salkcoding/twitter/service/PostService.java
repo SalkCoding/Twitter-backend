@@ -23,11 +23,11 @@ public class PostService {
     private final CascadingService cascadingService;
 
     private final UserService userService;
+    private final NotificationService notificationService;
+
     private final PostRepository postRepository;
     private final PostLikeRepository postLikeRepository;
     private final FollowRepository followRepository;
-    private final NotificationService notificationService;
-
 
     public List<Post> getReadablePostList(String readerId) {
 
@@ -89,5 +89,9 @@ public class PostService {
 
     public int countPostWritten(String userId) {
         return postRepository.countPostByUserId(userId);
+    }
+
+    public List<Post> getPostsWrittenByUser(String userId){
+        return postRepository.findAllByWriterId(userId);
     }
 }

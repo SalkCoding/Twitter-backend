@@ -2,14 +2,14 @@
 <main>
     {{>layouts/infoAlter}}
     {{>layouts/failAlter}}
+
     <div class="header">
         <h2>Notifications</h2>
     </div>
-
     {{#notification}}
         <div class="post">
             <div class="post_body">
-                <div class="post_header">
+                <div class="post_header" style="float: left">
                     <div class="post_header-text">
                         <h3>Received at {{{created}}}</h3>
                     </div>

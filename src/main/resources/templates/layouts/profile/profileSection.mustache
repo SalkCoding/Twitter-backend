@@ -2,10 +2,10 @@
 <main>
     {{>layouts/infoAlter}}
     {{>layouts/failAlter}}
+
     <div class="header">
         <h2>Profile</h2>
     </div>
-
     {{#profile}}
         <div class="post">
             <div class="post_profile-image">
@@ -27,6 +27,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="header">
+            <h2>Password change</h2>
+        </div>
         <div class="tweet_box">
             <form action="/profile/password/change" method="post">
                 <div class="tweet_box-input">
@@ -37,5 +41,60 @@
             </form>
         </div>
     {{/profile}}
+
+    <div class="header">
+        <h2>Tweets written by me</h2>
+    </div>
+    {{#tweet}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+            <div class="post_body">
+                <div class="post_header" style="float: left">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                            Posted at {{{created}}}
+                        </h3>
+                    </div>
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+                {{>layouts/profile/profilePostFooter}}
+            </div>
+        </div>
+    {{/tweet}}
+
+    <div class="header">
+        <h2>Comments written by me</h2>
+    </div>
+    {{#comment}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header">
+                    <div class="post_header-text">
+                        <h3>{{{writerId}}}
+                            <span class="header-icon-section">@{{{writerId}}}</span>
+                            Commented at {{{created}}}
+                        </h3>
+                    </div>
+                    <div class="post_header-description">
+                        <p>
+                            {{{content}}}
+                        </p>
+                    </div>
+                </div>
+                {{>layouts/likedComment/likedCommentFooter}}
+            </div>
+        </div>
+    {{/comment}}
 </main>
 <!-- main section end -->

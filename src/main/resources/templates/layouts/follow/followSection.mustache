@@ -15,6 +15,9 @@
         </form>
     </div>
 
+    <div class="header">
+        <h2>Following</h2>
+    </div>
     {{#follow}}
         <div class="post">
             <div class="post_profile-image">
@@ -22,18 +25,47 @@
             </div>
 
             <div class="post_body">
-                <div class="post_header">
+                <div class="post_header" style="float: left">
                     <div class="post_header-text">
                         <h3>{{{targetId}}}
                             <span class="header-icon-section">@{{{targetId}}}</span>
-                            <p>Last login time: {{{lastLogin}}}</p>
                         </h3>
-
+                        <br>
+                        <div class="post_header-description">
+                            <p>Last login time: {{{lastLogin}}}</p>
+                        </div>
                     </div>
                 </div>
                 {{>layouts/follow/followFooter}}
             </div>
         </div>
     {{/follow}}
+
+
+    <div class="header">
+        <h2>Followers</h2>
+    </div>
+    {{#follower}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header" style="float: left">
+                    <div class="post_header-text">
+                        <h3>{{{targetId}}}
+                            <span class="header-icon-section">@{{{targetId}}}</span>
+                        </h3>
+                    </div>
+                    <br>
+                    <div class="post_header-description">
+                        <p>Last login time: {{{lastLogin}}}</p>
+                    </div>
+                </div>
+                {{>layouts/follow/followerFooter}}
+            </div>
+        </div>
+    {{/follower}}
 </main>
 <!-- main section end -->

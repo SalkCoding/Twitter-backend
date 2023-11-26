@@ -21,9 +21,10 @@ public class CommentService {
     private final CascadingService cascadingService;
 
     private final UserService userService;
+    private final NotificationService notificationService;
+
     private final CommentRepository commentRepository;
     private final CommentLikeRepository commentLikeRepository;
-    private final NotificationService notificationService;
 
     public boolean hasComment(long postId) {
         List<Comment> commentList = commentRepository.getCommentsByPostId(postId);
@@ -77,5 +78,9 @@ public class CommentService {
 
     public int countCommentWritten(String userId) {
         return commentRepository.countByWriterId(userId);
+    }
+
+    public List<Comment> getCommentsWrittenByUser(String userId){
+        return commentRepository.findAllByWriterId(userId);
     }
 }

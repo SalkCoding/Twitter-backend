@@ -30,6 +30,7 @@ public class PostController {
         return "redirect:/";
     }
 
+    //TODO servlet refer header로 이전 페이지 리다이렉션
     @PostMapping("/post/delete")
     public String deletePostPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
