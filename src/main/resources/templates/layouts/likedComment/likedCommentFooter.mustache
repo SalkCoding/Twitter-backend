@@ -3,10 +3,10 @@
         <input type="hidden" name="postId" value="{{{postId}}}">
         <input type="hidden" name="commentId" value="{{{commentId}}}">
         <button formaction="/comment" formmethod="get">
-            <span style="cursor: pointer;" class="material-icons">shortcut</span>
+            <span style="cursor: pointer;" class="material-symbols-outlined">&#xe7e1;</span>
         </button>
         <button formaction="/comment/like/cancel" formmethod="post">
-            <span style="cursor: pointer;" class="material-icons">favorite_border</span>{{commentLikeCount}}
+            <span style="cursor: pointer;" class="material-symbols-outlined">&#xE87D;</span>{{commentLikeCount}}
         </button>
     </div>
 </form>

@@ -61,7 +61,7 @@ html {
     cursor: pointer;
 }
 
-.Menu_options .material-icons {
+.Menu_options .material-icons, .material-symbols-outlined {
     padding: 20px;
 }
 

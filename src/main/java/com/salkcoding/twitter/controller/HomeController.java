@@ -3,6 +3,7 @@ package com.salkcoding.twitter.controller;
 import com.salkcoding.twitter.dto.PostOutput;
 import com.salkcoding.twitter.entity.Post;
 import com.salkcoding.twitter.entity.User;
+import com.salkcoding.twitter.service.CommentService;
 import com.salkcoding.twitter.service.PostLikeService;
 import com.salkcoding.twitter.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class HomeController {
 
     private final PostService postService;
     private final PostLikeService postLikeService;
+    private final CommentService commentService;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -43,6 +45,7 @@ public class HomeController {
                             post.getPostId(),
                             post.getWriterId(),
                             post.getContent(),
+                            commentService.countCommentOnPost(post.getPostId()),
                             postLikeService.getLikeCountOnPost(post.getPostId()),
                             simpleDateFormat.format(calendar.getTime())
                     )

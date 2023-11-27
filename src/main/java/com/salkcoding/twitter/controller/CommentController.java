@@ -46,6 +46,7 @@ public class CommentController {
                 post.getPostId(),
                 post.getWriterId(),
                 post.getContent(),
+                commentService.countCommentOnPost(postId),
                 postLikeService.getLikeCountOnPost(post.getPostId()),
                 simpleDateFormat.format(calendar.getTime())
         );

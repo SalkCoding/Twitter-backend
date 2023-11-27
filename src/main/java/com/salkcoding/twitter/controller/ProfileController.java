@@ -62,6 +62,7 @@ public class ProfileController {
                             post.getPostId(),
                             post.getWriterId(),
                             post.getContent(),
+                            commentService.countCommentOnPost(post.getPostId()),
                             postLikeService.getLikeCountOnPost(post.getPostId()),
                             simpleDateFormat.format(calendar.getTime())
                     )

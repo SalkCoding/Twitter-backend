@@ -9,6 +9,7 @@ public class PostOutput {
     long postId;
     String writerId;
     String content;
+    int postCommentCount;
     int postLikeCount;
     String created;
 }

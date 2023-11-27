@@ -2,13 +2,13 @@
     <div class="post_footer">
         <input type="hidden" name="postId" value="{{{postId}}}">
         <button formaction="/comment" formmethod="get">
-            <span style="cursor: pointer;" class="material-icons">chat</span>
+            <span style="cursor: pointer;" class="material-icons">&#xe0b7;</span>{{postCommentCount}}
         </button>
         <button formaction="/post/like" formmethod="post">
-            <span style="cursor: pointer;" class="material-icons">favorite_border</span>{{postLikeCount}}
+            <span style="cursor: pointer;" class="material-symbols-outlined">&#xE87D;</span>{{postLikeCount}}
         </button>
         <button formaction="/post/delete" formmethod="post">
-            <span style="cursor: pointer;" class="material-icons">delete</span>
+            <span style="cursor: pointer;" class="material-icons">&#xe872;</span>
         </button>
     </div>
 </form>

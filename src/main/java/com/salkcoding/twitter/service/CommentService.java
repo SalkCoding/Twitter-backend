@@ -80,7 +80,11 @@ public class CommentService {
         return commentRepository.countByWriterId(userId);
     }
 
-    public List<Comment> getCommentsWrittenByUser(String userId){
+    public int countCommentOnPost(long postId) {
+        return commentRepository.countByPostId(postId);
+    }
+
+    public List<Comment> getCommentsWrittenByUser(String userId) {
         return commentRepository.findAllByWriterId(userId);
     }
 }
