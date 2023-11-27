@@ -5,6 +5,7 @@ import com.salkcoding.twitter.dto.NotificationOutput;
 import com.salkcoding.twitter.entity.Notification;
 import com.salkcoding.twitter.entity.User;
 import com.salkcoding.twitter.service.NotificationService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,12 +53,13 @@ public class NotificationController {
     @PostMapping("/notification/delete")
     public String notificationDeletePage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             NotificationInput notificationInput
     ) {
         if (user == null) return "redirect:/login";
 
         notificationService.deleteNotification(notificationInput.getNotificationId());
 
-        return "redirect:/notification";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 }

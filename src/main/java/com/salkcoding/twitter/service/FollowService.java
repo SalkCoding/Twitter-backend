@@ -31,8 +31,9 @@ public class FollowService {
     public void addFollow(String targetId, String followerId) {
         Follow follow = new Follow(targetId, followerId);
 
-        if (!targetId.equals(followerId))
-            notificationService.addNotification(targetId, "@" + followerId + " now following you!");
+        if (targetId.equals(followerId)) return;
+
+        notificationService.addNotification(targetId, "@" + followerId + " now following you!");
 
         followRepository.save(follow);
     }

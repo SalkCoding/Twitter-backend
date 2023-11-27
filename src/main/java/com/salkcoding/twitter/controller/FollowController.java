@@ -74,6 +74,7 @@ public class FollowController {
     public String followPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
             RedirectAttributes redirectAttributes,
+            HttpServletRequest httpServletRequest,
             FollowDTO followDTO
     ) {
         if (user == null) return "redirect:/login";
@@ -89,12 +90,13 @@ public class FollowController {
         if (!followService.isFollowed(targetId, userId))
             followService.addFollow(targetId, userId);
 
-        return "redirect:/follow";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/follow/delete")
     public String followDeletePage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             FollowDTO followDTO
     ) {
         if (user == null) return "redirect:/login";
@@ -104,7 +106,7 @@ public class FollowController {
         if (followService.isFollowed(targetId, userId))
             followService.deleteFollow(targetId, userId);
 
-        return "redirect:/";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
 }

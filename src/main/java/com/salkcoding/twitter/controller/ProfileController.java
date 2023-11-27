@@ -25,7 +25,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProfileController {
 
-    private final UserService userService;
     private final PostService postService;
     private final PostLikeService postLikeService;
     private final CommentService commentService;
@@ -41,14 +40,13 @@ public class ProfileController {
     ) {
         if (user == null) return "redirect:/login";
 
-        List<String> followerList = new ArrayList<>();
-        followService.getFollowerList(user.getUserId()).forEach(follow -> followerList.add(follow.getFollowerId()));
+        int followerCnt = followService.getFollowerList(user.getUserId()).size();
         ProfileOutput profile = new ProfileOutput(
                 user.getUserId(),
                 user.getPassword(),
                 postService.countPostWritten(user.getUserId()),
                 commentService.countCommentWritten(user.getUserId()),
-                followerList.isEmpty() ? "No followers :(" : String.join(", ", followerList),
+                followerCnt == 0 ? "No followers :(" : String.valueOf(followerCnt),
                 user.getLastLogin()
         );
         model.addAttribute("profile", profile);
@@ -90,21 +88,6 @@ public class ProfileController {
         model.addAttribute("comment", commentOutputList);
 
         return "profile";
-    }
-
-    @PostMapping("/profile/password/change")
-    public String changePasswordPage(
-            @SessionAttribute(name = "loginUser", required = false) User user,
-            HttpServletRequest servletRequest,
-            PasswordDTO passwordDTO
-    ) {
-        if (user == null) return "redirect:/login";
-
-        userService.changePassword(user.getUserId(), user.getPassword(), passwordDTO.getPassword());
-
-        servletRequest.getSession().invalidate();
-
-        return "redirect:/login";
     }
 
 }

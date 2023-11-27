@@ -1,0 +1,33 @@
+<!-- main section start -->
+<main>
+    {{>layouts/infoAlter}}
+    {{>layouts/failAlter}}
+
+    <div class="header">
+        <h2>More</h2>
+    </div>
+
+    <div class="header">
+        <h2>Password change</h2>
+    </div>
+    <div class="tweet_box">
+        <form action="/password/change" method="post">
+            <div class="tweet_box-input">
+                <input name="password" type="password" value="" placeholder="New password">
+                <button class="">Change</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="header">
+        <h2>Delete account</h2>
+    </div>
+    <div class="tweet_box">
+        <form action="/user/delete" method="post">
+            <div class="tweet_box-input">
+                <button style="align-self: center" class="delete">Delete</button>
+            </div>
+        </form>
+    </div>
+</main>
+<!-- main section end -->

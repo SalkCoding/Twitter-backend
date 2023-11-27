@@ -8,6 +8,7 @@ import com.salkcoding.twitter.service.CommentLikeService;
 import com.salkcoding.twitter.service.CommentService;
 import com.salkcoding.twitter.service.PostLikeService;
 import com.salkcoding.twitter.service.PostService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,6 +83,7 @@ public class CommentController {
     public String addCommentPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
             CommentInput commentInput,
+            HttpServletRequest httpServletRequest,
             RedirectAttributes redirectAttributes
     ) {
         if (user == null) return "redirect:/login";
@@ -96,13 +98,14 @@ public class CommentController {
 
         commentService.addComment(postId, userId, content);
 
-        return "redirect:/comment";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/comment/delete")
     public String deleteCommentPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
             CommentLikeDTO commentDTO,
+            HttpServletRequest httpServletRequest,
             RedirectAttributes redirectAttributes
     ) {
         if (user == null) return "redirect:/login";
@@ -111,13 +114,14 @@ public class CommentController {
 
         redirectAttributes.addFlashAttribute("postId", commentDTO.getPostId());
 
-        return "redirect:/comment";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/comment/like")
     public String likeCommentPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
             CommentLikeDTO commentDTO,
+            HttpServletRequest httpServletRequest,
             RedirectAttributes redirectAttributes
     ) {
         if (user == null) return "redirect:/login";
@@ -131,12 +135,13 @@ public class CommentController {
 
         redirectAttributes.addFlashAttribute("postId", commentDTO.getPostId());
 
-        return "redirect:/comment";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/comment/like/cancel")
     public String likeCancelPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             CommentLikeDTO commentLikeDTO
     ) {
         if (user == null) return "redirect:/login";
@@ -146,7 +151,7 @@ public class CommentController {
         if (commentLikeService.isLikedComment(commentId, userId))
             commentLikeService.deleteCommentLike(commentId, userId);
 
-        return "redirect:/liked/comment";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
 }

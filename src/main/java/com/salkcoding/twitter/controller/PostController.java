@@ -4,6 +4,7 @@ import com.salkcoding.twitter.dto.PostInput;
 import com.salkcoding.twitter.entity.User;
 import com.salkcoding.twitter.service.PostLikeService;
 import com.salkcoding.twitter.service.PostService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ public class PostController {
     @PostMapping("/post/create")
     public String addPostPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             PostInput postInput
     ) {
         if (user == null) return "redirect:/login";
@@ -27,25 +29,25 @@ public class PostController {
 
         postService.addPost(user.getUserId(), postInput.getContent());
 
-        return "redirect:/";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
-    //TODO servlet refer header로 이전 페이지 리다이렉션
     @PostMapping("/post/delete")
     public String deletePostPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             PostInput postInput
     ) {
         if (user == null) return "redirect:/login";
 
         postService.deletePost(user.getUserId(), postInput.getPostId());
-
-        return "redirect:/";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/post/like")
     public String likePostPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             PostInput PostOutput
     ) {
         if (user == null) return "redirect:/login";
@@ -57,12 +59,13 @@ public class PostController {
         else
             postLikeService.addPostLike(postId, userId);
 
-        return "redirect:/";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
     @PostMapping("/post/like/cancel")
     public String likeCancelPage(
             @SessionAttribute(name = "loginUser", required = false) User user,
+            HttpServletRequest httpServletRequest,
             PostInput PostOutput
     ) {
         if (user == null) return "redirect:/login";
@@ -72,7 +75,7 @@ public class PostController {
         if (postLikeService.isLikedPost(postId, userId))
             postLikeService.deletePostLike(postId, userId);
 
-        return "redirect:/liked/post";
+        return "redirect:" + httpServletRequest.getHeader("Referer");
     }
 
 }
