@@ -9,10 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +21,7 @@ public class PostService {
 
     private final UserService userService;
     private final NotificationService notificationService;
+    private final BlockService blockService;
 
     private final PostRepository postRepository;
     private final PostLikeRepository postLikeRepository;
@@ -32,12 +30,18 @@ public class PostService {
     public List<Post> getReadablePostList(String readerId) {
 
         //Written by himself
-        List<Post> list = new ArrayList<>(postRepository.findAllByWriterId(readerId));
+        Set<Post> set = new HashSet<>(postRepository.findAllByWriterId(readerId));
 
         //Written by Followers
         List<Follow> followers = followRepository.getFollowsByFollowerId(readerId);
-        followers.forEach(follow -> list.addAll(postRepository.findAllByWriterId(follow.getTargetId())));
+        followers.forEach(follow -> set.addAll(postRepository.findAllByWriterId(follow.getTargetId())));
 
+        //Remove posts from people who blocked reader
+        blockService.getBlockerList(readerId).forEach(block -> {
+            set.removeIf(post-> block.getBlockerId().equals(post.getWriterId()));
+        });
+
+        List<Post> list = new ArrayList<>(set);
         list.sort(Comparator.comparingLong(Post::getCreated));
         Collections.reverse(list);
 

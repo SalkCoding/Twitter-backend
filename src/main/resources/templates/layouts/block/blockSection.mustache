@@ -1,0 +1,44 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+
+    <div class="header">
+        <h2>Block user</h2>
+    </div>
+    <div class="tweet_box">
+        <form action="/block/create" method="post">
+            <div class="tweet_box-input">
+                <img src="/images/profilePic.jpg" alt="profile image">
+                <input name="targetId" type="text" placeholder="Who want to block? Enter user ID!">
+                <button class="">Block</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="header">
+        <h2>Block list</h2>
+    </div>
+    {{#block}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header" style="float: left">
+                    <div class="post_header-text">
+                        <h3>{{{targetId}}}
+                            <span class="header-icon-section">@{{{targetId}}}</span>
+                        </h3>
+                        <br>
+                        <div class="post_header-description">
+                            <p>Last login time: {{{lastLogin}}}</p>
+                        </div>
+                    </div>
+                </div>
+                {{>layouts/block/blockFooter}}
+            </div>
+        </div>
+    {{/block}}
+</main>
+<!-- main section end -->

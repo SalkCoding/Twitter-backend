@@ -18,4 +18,12 @@ public class Block {
     String targetId;
 
     String blockerId;
+
+    long blockedTime;
+
+    public Block(String targetId, String blockerId) {
+        this.targetId = targetId;
+        this.blockerId = blockerId;
+        this.blockedTime = System.currentTimeMillis();
+    }
 }

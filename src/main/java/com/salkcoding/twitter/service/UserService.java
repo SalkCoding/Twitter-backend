@@ -30,6 +30,10 @@ public class UserService {
         return user;
     }
 
+    public User getUser(String userId) {
+        return userRepository.findById(userId).orElseThrow();
+    }
+
     public User getUser(LoginDTO loginDTO) {
         return getUser(loginDTO.getUserId(), loginDTO.getPassword());
     }

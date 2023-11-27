@@ -16,6 +16,7 @@ public class CascadingService {
     private final FollowRepository followRepository;
     private final CommentRepository commentRepository;
     private final CommentLikeRepository commentLikeRepository;
+    private final BlockRepository blockRepository;
 
     @Transactional
     public void removeUserCascading(String userId){
@@ -26,6 +27,8 @@ public class CascadingService {
         followRepository.deleteAllByTargetIdOrFollowerId(userId);
         commentRepository.deleteAllByWriterId(userId);
         commentLikeRepository.deleteAllByLikerId(userId);
+        blockRepository.deleteAllByBlockerId(userId);
+        blockRepository.deleteAllByTargetId(userId);
     }
 
     @Transactional

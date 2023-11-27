@@ -1,0 +1,34 @@
+<!-- main section start -->
+<main>
+    {{>layouts/failAlter}}
+    <div class="header">
+        <h2>Explore</h2>
+    </div>
+
+    <div class="header">
+        <h2>Knowable user</h2>
+    </div>
+    {{#user}}
+        <div class="post">
+            <div class="post_profile-image">
+                <img src="/images/profilePic.jpg" alt="profile">
+            </div>
+
+            <div class="post_body">
+                <div class="post_header" style="float: left">
+                    <div class="post_header-text">
+                        <h3>{{{targetId}}}
+                            <span class="header-icon-section">@{{{targetId}}}</span>
+                        </h3>
+                    </div>
+                    <br>
+                    <div class="post_header-description">
+                        <p>Last login time: {{{lastLogin}}}</p>
+                    </div>
+                </div>
+                {{>layouts/explore/exploreFooter}}
+            </div>
+        </div>
+    {{/user}}
+</main>
+<!-- main section end -->
