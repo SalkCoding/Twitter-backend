@@ -29,7 +29,7 @@ public class SignInController {
     }
 
     @PostMapping("/signin")
-    public String signPage(
+    public String signInPage(
             @SessionAttribute(value = "loginUser", required = false) User user,
             HttpServletRequest servletRequest,
             LoginDTO loginDTO,
@@ -53,6 +53,6 @@ public class SignInController {
 
         userService.updateLastLogin(loginResult.getUserId());
 
-        return "redirect:/";
+        return "redirect:";
     }
 }
