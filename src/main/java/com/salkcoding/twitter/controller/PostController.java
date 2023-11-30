@@ -25,7 +25,7 @@ public class PostController {
     ) {
         if (user == null) return "redirect:/login";
 
-        if (postInput.getContent().isEmpty()) return "redirect:http://localhost:8080/";
+        if (postInput.getContent().isEmpty()) return "redirect:http://localhost:8080";
 
         postService.addPost(user.getUserId(), postInput.getContent());
 

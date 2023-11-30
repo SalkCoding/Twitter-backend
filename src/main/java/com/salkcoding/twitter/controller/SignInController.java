@@ -24,7 +24,7 @@ public class SignInController {
     public String loginPage(
             @SessionAttribute(value = "loginUser", required = false) User user
     ) {
-        if (user != null) return "redirect:http://localhost:8080/";
+        if (user != null) return "redirect:http://localhost:8080";
         return "login";
     }
 
@@ -35,7 +35,7 @@ public class SignInController {
             LoginDTO loginDTO,
             Model model
     ) {
-        if (user != null) return "redirect:http://localhost:8080/";
+        if (user != null) return "redirect:http://localhost:8080";
 
         //로그인 성공
         if (!userService.isRegisteredUser(loginDTO.getUserId(), loginDTO.getPassword())) {
@@ -53,6 +53,6 @@ public class SignInController {
 
         userService.updateLastLogin(loginResult.getUserId());
 
-        return "redirect:http://localhost:8080/";
+        return "redirect:http://localhost:8080";
     }
 }
