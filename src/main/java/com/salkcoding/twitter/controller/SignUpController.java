@@ -22,7 +22,7 @@ public class SignUpController {
     public String loginPage(
             @SessionAttribute(value = "loginUser", required = false) User user
     ) {
-        if (user != null) return "redirect:/";
+        if (user != null) return "redirect:http://localhost:8080/";
         return "register";
     }
 
@@ -33,7 +33,7 @@ public class SignUpController {
             LoginDTO loginDTO,
             Model model
     ) {
-        if (user != null) return "redirect:/";
+        if (user != null) return "redirect:http://localhost:8080/";
 
         if (userService.isRegisteredUserId(loginDTO.getUserId())) {
             //model에 alter 추가
@@ -49,7 +49,7 @@ public class SignUpController {
         HttpSession session = servletRequest.getSession(true);
         session.setAttribute("loginUser", loginResult);
 
-        return "redirect:/";
+        return "redirect:http://localhost:8080/";
     }
 
 }
