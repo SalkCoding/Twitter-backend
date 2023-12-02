@@ -4,10 +4,7 @@ import com.salkcoding.twitter.dto.*;
 import com.salkcoding.twitter.entity.Comment;
 import com.salkcoding.twitter.entity.Post;
 import com.salkcoding.twitter.entity.User;
-import com.salkcoding.twitter.service.CommentLikeService;
-import com.salkcoding.twitter.service.CommentService;
-import com.salkcoding.twitter.service.PostLikeService;
-import com.salkcoding.twitter.service.PostService;
+import com.salkcoding.twitter.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -28,6 +25,7 @@ public class CommentController {
     private final PostLikeService postLikeService;
     private final CommentService commentService;
     private final CommentLikeService commentLikeService;
+    private final NotificationService notificationService;
 
     private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -98,6 +96,9 @@ public class CommentController {
         if (content.isEmpty() || content.isBlank()) return "redirect:/comment";
 
         commentService.addComment(postId, userId, content);
+
+        Post post = postService.getPostById(postId);
+        notificationService.addNotification(post.getWriterId(), "@" + userId + " comments to your post! [" + content + "]");
 
         return "redirect:" + httpServletRequest.getHeader("Referer");
     }
